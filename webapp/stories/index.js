@@ -1,3 +1,4 @@
+import '../src/locale'
 import './style.css'
 
 import './Button'
