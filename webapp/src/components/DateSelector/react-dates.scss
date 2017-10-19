@@ -1,0 +1,165 @@
+$datePickerFontSize: 14px;
+$datePickerTop: 45px;
+$datePickerIconFontSize: 18px;
+$datePickerWeekNameColor: #7ddfac;
+$datePickerWeekNameBackground: #f5f5f5;
+$datePickerWeekNameFontWeight: bold;
+$datePickerActiveColor: #3ed2a4;
+$datePickerSpanColor: rgba(62, 210, 164, 0.5);
+$datePickerDayColor: #6f6f6f;
+$datePickerDayOutofRange: #b2b2b2;
+$borderRadius: 3px;
+
+.ReactDates-overrides {
+
+  .DayPicker {
+    border: none;
+    box-shadow: none;
+    font-weight: bold;
+    background: none;
+  }
+
+  .DateRangePicker {
+    position: absolute;
+    z-index: 1;
+    font-family: "Open Sans", "Uni Neue";
+  }
+
+  .CalendarDay {
+    border: 0;
+    color: $datePickerDayColor;
+    font-size: $datePickerFontSize;
+    height: 28px !important; // stylelint-disable-line
+    font-weight: normal;
+    transition:
+      color 150ms ease-out,
+      border-radius 150ms ease-out,
+      background-color 150ms ease-out;
+    will-change: color background-color;
+  }
+
+  .DateRangePickerInput {
+    border-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .DateRangePicker,
+  .DateRangePicker > div {
+    height: 100%;
+  }
+
+  .DateRangePicker__picker--open-down {
+    top: $datePickerTop;
+  }
+
+  .DayPickerNavigation__next,
+  .DayPickerNavigation__prev {
+    border: 0;
+    background-color: transparent;
+    font-size: $datePickerIconFontSize;
+  }
+
+  .CalendarMonth__caption {
+    opacity: 0;
+    padding: 15px 0 46px;
+    font-size: $datePickerFontSize;
+    text-transform: uppercase;
+    transition: opacity 100ms ease-in-out;
+  }
+
+  .CalendarMonth[data-visible="true"] table:before {
+    opacity: 1;
+  }
+
+  .CalendarMonth[data-visible="false"] + .CalendarMonth table:before {
+    opacity: 0;
+  }
+
+  .CalendarMonth[data-visible="true"] .CalendarMonth__caption {
+    opacity: 1;
+  }
+
+  .CalendarMonth[data-visible="false"]:last-child .CalendarMonth__caption {
+    opacity: 0;
+  }
+
+  .DayPicker__week-header {
+    top: 53px;
+  }
+
+  .DayPicker__week-header ul {
+    background-color: $datePickerWeekNameBackground;
+    color: $datePickerWeekNameColor;
+    font-weight: $datePickerWeekNameFontWeight;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(228, 228, 228, 0.5);
+    border-bottom: 1px solid rgba(228, 228, 228, 0.5);
+  }
+
+  .DayPickerNavigation {
+    color: $datePickerActiveColor;
+  }
+
+  .DayPickerNavigation__prev {
+    left: 10px;
+  }
+
+  .DayPickerNavigation__next {
+    right: 10px;
+  }
+
+  .CalendarDay--blocked-out-of-range {
+    color: $datePickerDayOutofRange;
+  }
+
+  .CalendarMonthGrid {
+    background: none;
+  }
+
+  .CalendarDay--selected-span {
+    background-color: #eeeeee;
+  }
+
+  .CalendarDay--selected-start,
+  .CalendarDay--selected-end,
+  .CalendarDay--selected {
+    background-color: $datePickerActiveColor;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  .CalendarDay--selected {
+    border-radius: $borderRadius;
+  }
+
+  .CalendarDay--selected-start {
+    border-radius: $borderRadius 0 0 $borderRadius;
+  }
+
+  .CalendarDay--selected-end {
+    border-radius: 0 $borderRadius $borderRadius 0;
+  }
+
+  .CalendarDay:active {
+    background-color: lighten($datePickerActiveColor, 30%);
+    border-radius: $borderRadius;
+  }
+
+  .CalendarMonth table {
+    position: relative;
+  }
+
+  .CalendarMonth table:before {
+    content: "";
+    display: block;
+    height: 220px;
+    width: 1px;
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateX(-12px) translateY(-70px);
+    position: absolute;
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+  }
+}

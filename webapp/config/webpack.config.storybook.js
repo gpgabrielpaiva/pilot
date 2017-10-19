@@ -84,6 +84,14 @@ module.exports = {
         ],
       },
       {
+        test: /\.scss/,
+        use: [
+          { loader: require.resolve('style-loader') },
+          { loader: require.resolve('css-loader') },
+          { loader: require.resolve('sass-loader') },
+        ]
+      },
+      {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
         loader: require.resolve('file-loader'),
         options: {
