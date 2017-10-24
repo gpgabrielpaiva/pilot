@@ -56,8 +56,8 @@ describe('DateSelector', () => {
       const dateReceived = onChange.mock.calls[0][0]
 
       expect(onChange).toHaveBeenCalled()
-      expect(dateReceived).toHaveProperty('start')
-      expect(dateReceived).toHaveProperty('end')
+      expect(dateReceived.start).toBeInstanceOf(moment)
+      expect(dateReceived.end).toBeInstanceOf(moment)
     })
 
     it('should return a seven-day interval', () => {
