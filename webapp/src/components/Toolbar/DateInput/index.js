@@ -51,9 +51,6 @@ const momentToText = ({ start, end }) => ({
   end: end ? end.format(DATE_MASK) : '',
 })
 
-// const validDates = ({ start, end }) =>
-//   moment(start).isValid() && moment(end).isValid()
-//
 const isEndInputShown = (dates) => {
   if (dates.start === dates.end) {
     return false
