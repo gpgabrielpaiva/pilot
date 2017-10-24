@@ -3972,7 +3972,7 @@ exports[`Storyshots DateSelector All types 1`] = `
             checked={false}
             id="dateselector-always-the-same-string-preset-today"
             name="dateselector-always-the-same-string-presets"
-            onClick={[Function]}
+            onChange={[Function]}
             type="radio"
           />
           <label
@@ -3990,7 +3990,7 @@ exports[`Storyshots DateSelector All types 1`] = `
               checked={false}
               id="dateselector-always-the-same-string-preset-last-7"
               name="dateselector-always-the-same-string-presets"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
             />
             <label
@@ -4004,7 +4004,7 @@ exports[`Storyshots DateSelector All types 1`] = `
               checked={false}
               id="dateselector-always-the-same-string-preset-last-15"
               name="dateselector-always-the-same-string-presets"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
             />
             <label
@@ -4018,7 +4018,7 @@ exports[`Storyshots DateSelector All types 1`] = `
               checked={false}
               id="dateselector-always-the-same-string-preset-last-30"
               name="dateselector-always-the-same-string-presets"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
             />
             <label
@@ -4032,7 +4032,7 @@ exports[`Storyshots DateSelector All types 1`] = `
               checked={false}
               id="dateselector-always-the-same-string-preset-last-60"
               name="dateselector-always-the-same-string-presets"
-              onClick={[Function]}
+              onChange={[Function]}
               type="radio"
             />
             <label
@@ -4052,7 +4052,7 @@ exports[`Storyshots DateSelector All types 1`] = `
                 checked={true}
                 id="dateselector-always-the-same-string-preset-single"
                 name="dateselector-always-the-same-string-presets"
-                onClick={[Function]}
+                onChange={[Function]}
                 type="radio"
               />
               <label
@@ -4066,7 +4066,7 @@ exports[`Storyshots DateSelector All types 1`] = `
                 checked={false}
                 id="dateselector-always-the-same-string-preset-range"
                 name="dateselector-always-the-same-string-presets"
-                onClick={[Function]}
+                onChange={[Function]}
                 type="radio"
               />
               <label
@@ -7189,9 +7189,11 @@ exports[`Storyshots DateSelector All types 1`] = `
       <div
         className={undefined}
       >
-        <caption>
+        <div
+          className={undefined}
+        >
           1 dia selecionado
-        </caption>
+        </div>
         <button
           className=""
           disabled={false}
