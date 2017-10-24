@@ -68,7 +68,7 @@ class DateSelectorExample extends React.Component {
         focusedInput={this.state.focusedInput}
         onFocusChange={this.handleFocusChange}
         onChange={this.handleChange}
-        onConfirm={(dates) => console.log('onConfirm', dates)}
+        onConfirm={dates => console.log('onConfirm', dates)}
         onCancel={() => console.log('onCancel')}
       />
     )
