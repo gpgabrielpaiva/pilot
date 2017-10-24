@@ -128,7 +128,7 @@ describe('DatePicker', () => {
 
     const inputs = component.find('input').length
     const inputsWithEnd = componentWithEnd.find('input').length
-    const inputsWithNullEnd = componentWithEnd.find('input').length
+    const inputsWithNullEnd = componentWithNullEnd.find('input').length
 
     expect(inputs).toBe(1)
     expect(inputsWithEnd).toBe(2)
