@@ -34,8 +34,51 @@ describe('DateSelector', () => {
     )
   })
 
-  describe('seven days preset', () => {
-    it('should return { start, end }', () => {
+  it('should call onConfirm', () => {
+    const onConfirm = jest.fn()
+
+    const component = shallow(
+      <DateSelector
+        presets={presets}
+        dates={dates}
+        focusedInput="startDate"
+        onConfirm={onConfirm}
+      />
+    )
+
+    component
+      .find(Button)
+      .at(1)
+      .simulate('click')
+
+    const lastOnConfirmCalledWith = onConfirm.mock.calls[0][0]
+
+    expect(lastOnConfirmCalledWith.start).toBeInstanceOf(moment)
+    expect(lastOnConfirmCalledWith.end).toBeInstanceOf(moment)
+  })
+
+  it('should call onCancel', () => {
+    const onCancel = jest.fn()
+
+    const component = shallow(
+      <DateSelector
+        presets={presets}
+        dates={dates}
+        focusedInput="startDate"
+        onCancel={onCancel}
+      />
+    )
+
+    component
+      .find(Button)
+      .first()
+      .simulate('click')
+
+    expect(onCancel).toHaveBeenCalled()
+  })
+
+  describe('Date Range', () => {
+    it('should return { start, end } onChange', () => {
       const onChange = jest.fn()
 
       const component = shallow(
@@ -86,106 +129,63 @@ describe('DateSelector', () => {
 
       expect(dateDiff).toBe(-7)
     })
-  })
 
-  it('should call onConfirm', () => {
-    const onConfirm = jest.fn()
+    it('should call onFocusChange', () => {
+      const onFocusChange = jest.fn()
+      const onChange = jest.fn()
 
-    const component = shallow(
-      <DateSelector
-        presets={presets}
-        dates={dates}
-        focusedInput="startDate"
-        onConfirm={onConfirm}
-      />
-    )
+      let focusedInputHistory = []
 
-    component
-      .find(Button)
-      .at(1)
-      .simulate('click')
+      class TestComponent extends React.Component {
+        constructor () {
+          super()
 
-    const lastOnConfirmCalledWith = onConfirm.mock.calls[0][0]
+          this.state = {
+            dates: {},
+            focusedInput: 'startDate',
+          }
 
-    expect(lastOnConfirmCalledWith.start).toBeInstanceOf(moment)
-    expect(lastOnConfirmCalledWith.end).toBeInstanceOf(moment)
-  })
-
-  it('should call onCancel', () => {
-    const onCancel = jest.fn()
-
-    const component = shallow(
-      <DateSelector
-        presets={presets}
-        dates={dates}
-        focusedInput="startDate"
-        onCancel={onCancel}
-      />
-    )
-
-    component
-      .find(Button)
-      .first()
-      .simulate('click')
-
-    expect(onCancel).toHaveBeenCalled()
-  })
-
-  it('should call onFocusChange', () => {
-    const onFocusChange = jest.fn()
-    const onChange = jest.fn()
-
-    let focusedInputHistory = []
-
-    class TestComponent extends React.Component {
-      constructor () {
-        super()
-
-        this.state = {
-          dates: {},
-          focusedInput: 'startDate',
+          this.onFocusChange = this.onFocusChange.bind(this)
+          this.onChange = this.onChange.bind(this)
         }
 
-        this.onFocusChange = this.onFocusChange.bind(this)
-        this.onChange = this.onChange.bind(this)
+        onFocusChange (focusedInput) {
+          focusedInputHistory.push(focusedInput)
+          this.setState({ focusedInput })
+        }
+
+        onChange (dates) {
+          this.setState({ dates })
+        }
+
+        render () {
+          return (
+            <DateSelector
+              presets={presets}
+              dates={this.state.dates}
+              focusedInput={this.state.focusedInput}
+              onFocusChange={this.onFocusChange}
+              onChange={this.onChange}
+            />
+          )
+        }
       }
 
-      onFocusChange (focusedInput) {
-        focusedInputHistory.push(focusedInput)
-        this.setState({ focusedInput })
-      }
+      const component = mount(<TestComponent />)
 
-      onChange (dates) {
-        this.setState({ dates })
-      }
+      // select period preset
+      component
+        .find('ol input')
+        .last()
+        .simulate('change')
 
-      render () {
-        return (
-          <DateSelector
-            presets={presets}
-            dates={this.state.dates}
-            focusedInput={this.state.focusedInput}
-            onFocusChange={this.onFocusChange}
-            onChange={this.onChange}
-          />
-        )
-      }
-    }
+      // chose the startDate
+      component.find('table').at(2).find('button').at(4).simulate('click')
+      expect(focusedInputHistory[0]).toBe('endDate')
 
-    const component = mount(<TestComponent />)
-
-    // select period preset
-    component
-      .find('ol input')
-      .last()
-      .simulate('change')
-
-    // chose the startDate
-    component.find('table').at(2).find('button').at(4).simulate('click')
-    expect(focusedInputHistory[0]).toBe('endDate')
-
-    // chose the endDate
-    component.find('table').at(2).find('button').at(10).simulate('click')
-    expect(focusedInputHistory[1]).toBe('startDate')
+      // chose the endDate
+      component.find('table').at(2).find('button').at(10).simulate('click')
+      expect(focusedInputHistory[1]).toBe('startDate')
+    })
   })
 })
