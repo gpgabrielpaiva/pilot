@@ -75,6 +75,27 @@ describe('DatePicker', () => {
     expect(onChange).toHaveBeenCalledTimes(1)
   })
 
+  it('should return start and end properties', () => {
+    const onChange = jest.fn()
+
+    const component = mount(
+      <DateInput
+        onChange={onChange}
+        presets={presets}
+        dates={{ start: null, end: null }}
+      />
+    )
+
+    component.find('input').first().simulate('focus')
+    component.find('ol input').at(0).simulate('change')
+    component.find(Button).at(1).simulate('click')
+
+    const dates = onChange.mock.calls[0][0]
+
+    expect(dates).toHaveProperty('start')
+    expect(dates).toHaveProperty('end')
+  })
+
   it('should show end input when appropriate', () => {
     const onChange = jest.fn()
 
