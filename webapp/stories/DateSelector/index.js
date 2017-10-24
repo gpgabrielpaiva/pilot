@@ -1,16 +1,12 @@
 import React from 'react'
 
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
 
 import moment from 'moment'
 
 import DateSelector from '../../src/components/DateSelector'
 
 import style from './style.css'
-
-const changeAction = action('onChange')
-const focusAction = action('onFocusChange')
 
 const presets = [
   {
@@ -58,12 +54,10 @@ class DateSelectorExample extends React.Component {
 
   handleChange (dates) {
     this.setState({ dates })
-    changeAction(dates)
   }
 
   handleFocusChange (focusedInput) {
     this.setState({ focusedInput })
-    focusAction(focusedInput)
   }
 
   render () {
@@ -74,8 +68,8 @@ class DateSelectorExample extends React.Component {
         focusedInput={this.state.focusedInput}
         onFocusChange={this.handleFocusChange}
         onChange={this.handleChange}
-        onConfirm={action('onConfirm')}
-        onCancel={action('onCancel')}
+        onConfirm={(dates) => console.log('onConfirm', dates)}
+        onCancel={() => console.log('onCancel')}
       />
     )
   }
