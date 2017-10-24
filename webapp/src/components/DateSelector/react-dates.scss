@@ -59,6 +59,7 @@ $borderRadius: 3px;
     border: 0;
     background-color: transparent;
     font-size: $datePickerIconFontSize;
+    color: $datePickerWeekNameColor;
   }
 
   .CalendarMonth__caption {
