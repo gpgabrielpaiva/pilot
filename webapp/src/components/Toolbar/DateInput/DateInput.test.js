@@ -94,6 +94,9 @@ describe('DatePicker', () => {
 
     expect(dates).toHaveProperty('start')
     expect(dates).toHaveProperty('end')
+
+    expect(dates.start).toBeInstanceOf(moment)
+    expect(dates.end).toBeInstanceOf(moment)
   })
 
   it('should show end input when appropriate', () => {
