@@ -18,7 +18,7 @@ const presets = [
   },
 ]
 
-const dates = {
+const defaultDates = {
   start: moment(),
   end: moment(),
 }
@@ -28,7 +28,7 @@ describe('DateSelector', () => {
     shallow(
       <DateSelector
         presets={presets}
-        dates={dates}
+        dates={defaultDates}
         focusedInput="startDate"
       />
     )
@@ -40,7 +40,7 @@ describe('DateSelector', () => {
     const component = shallow(
       <DateSelector
         presets={presets}
-        dates={dates}
+        dates={defaultDates}
         focusedInput="startDate"
         onConfirm={onConfirm}
       />
@@ -63,7 +63,7 @@ describe('DateSelector', () => {
     const component = shallow(
       <DateSelector
         presets={presets}
-        dates={dates}
+        dates={defaultDates}
         focusedInput="startDate"
         onCancel={onCancel}
       />
@@ -84,7 +84,7 @@ describe('DateSelector', () => {
       const component = shallow(
         <DateSelector
           presets={presets}
-          dates={dates}
+          dates={defaultDates}
           focusedInput="startDate"
           onChange={onChange}
         />
@@ -109,7 +109,7 @@ describe('DateSelector', () => {
       const component = shallow(
         <DateSelector
           presets={presets}
-          dates={dates}
+          dates={defaultDates}
           focusedInput="startDate"
           onChange={onChange}
         />
@@ -131,10 +131,7 @@ describe('DateSelector', () => {
     })
 
     it('should call onFocusChange', () => {
-      const onFocusChange = jest.fn()
-      const onChange = jest.fn()
-
-      let focusedInputHistory = []
+      const focusedInputHistory = []
 
       class TestComponent extends React.Component {
         constructor () {
@@ -180,11 +177,13 @@ describe('DateSelector', () => {
         .simulate('change')
 
       // chose the startDate
-      component.find('table').at(2).find('button').at(4).simulate('click')
+      component.find('table').at(2).find('button').at(4)
+        .simulate('click')
       expect(focusedInputHistory[0]).toBe('endDate')
 
       // chose the endDate
-      component.find('table').at(2).find('button').at(10).simulate('click')
+      component.find('table').at(2).find('button').at(10)
+        .simulate('click')
       expect(focusedInputHistory[1]).toBe('startDate')
     })
   })
